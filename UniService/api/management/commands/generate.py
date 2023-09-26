@@ -11,7 +11,7 @@ from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
 
 BASE_ID: int = 1000000
-
+Set_Usernames = set()
 
 class Command(BaseCommand):
     help = "Generates data"
@@ -149,7 +149,15 @@ def names(x: int, gender: str) -> list[tuple[str, str, str]]:
     return name_list
 
 
-def address(gender:str) -> str:
+def UserName() -> str:
+    global Set_Usernames
+    counter = 0
+    temp_username = "ZH"+counter
+    if temp_username in Set_Usernames:
+        Set_Usernames.add()
+    {User.objects.all()}
+
+def address() -> str:
     """Generate a random address.
 
     Returns:
@@ -168,11 +176,22 @@ def address(gender:str) -> str:
     return address
 
 
-def UserImages() -> str:
+def UserImages(gender:str) -> str:
     """Generate a number to assign an image.
-    
+    https://github.com/Universally-University/backend/blob/main/UniService/mock_data/UserImages/{gender}/image{image_num}.png?raw=true
     Returns:
-        str: image name"""
+    str: image name"""
+    max_female = 12
+    max_male = 15
+    imagestr = "https://github.com/Universally-University/backend/blob/main/UniService/mock_data/UserImages/"
+    match gender.lower():
+        case "female":
+            num = random.randrange(1,max_female)
+            imagestr += "Female/image" + str(num) + ".png?raw=true"
+        case "male":
+            num = random.randrange(1,max_male)
+            imagestr += "Male/image" + str(num) + ".png?raw=true"
+    return imagestr
 
 
 def dob(min_age: int = 18, max_age: int = 80) -> date:
