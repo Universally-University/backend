@@ -1,4 +1,6 @@
-from django.db.backends.mysql.base import DatabaseWrapper as MysqlDatabaseWrapper
+from django.db.backends.mysql.base import \
+    DatabaseWrapper as MysqlDatabaseWrapper
+
 from .features import DatabaseFeatures
 
 

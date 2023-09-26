@@ -1,12 +1,12 @@
 import math
-from django.core.management.base import BaseCommand
-from django.core.management.base import CommandError
 import random
-from datetime import timedelta, date
+from datetime import date, timedelta
+
 import api.models as api
 from accounts.models import User
-from django.conf import settings
 from api.util import current_total
+from django.conf import settings
+from django.core.management.base import BaseCommand, CommandError
 
 
 class Command(BaseCommand):
