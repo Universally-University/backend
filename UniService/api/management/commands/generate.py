@@ -1,13 +1,14 @@
 import math
-from django.core.management.base import BaseCommand
-from django.core.management.base import CommandError
 import random
-from datetime import timedelta, date
+from datetime import date, timedelta
+
 import api.models as api
-from accounts.models import User
-from django.conf import settings
 import tqdm
+from accounts.models import User
+from accounts.models import UserManager
 from api.util import current_total
+from django.conf import settings
+from django.core.management.base import BaseCommand, CommandError
 
 BASE_ID: int = 1000000
 
@@ -54,7 +55,7 @@ class Command(BaseCommand):
                     *name_list(staff, "S", min_age=25, max_age=65),
                 ]
             ):
-                User(
+                user = User(
                     id=unique_id(CURRENT_USER_COUNT),
                     first_name=user[0],
                     last_name=user[1],
@@ -62,7 +63,9 @@ class Command(BaseCommand):
                     type=user[3],
                     address=user[4],
                     dob=user[5],
-                ).save()
+                )
+                user.set_password(settings.USER_PASSWORD)
+                user.save()
         except KeyboardInterrupt:
             current_total()
             raise SystemExit
@@ -152,8 +155,24 @@ def address() -> str:
     Returns:
         str: Random Address.
     """
+    from mock_data.addressInfo import streettype
+    #from mock_data.addressInfo import streetnames
+    from mock_data.male_firstname import names
+    from mock_data.addressInfo import suburbs
 
-    return "42 Wallaby Way, Sydney, NSW, 2000"
+    address = str(random.randrange(1,210))+ " "
+    address += random.choice(names) + " "
+    address += random.choice(streettype) + ", "
+    address += random.choice(suburbs)
+
+    return address
+
+
+def Images() -> str:
+    """Generate a number to assign an image.
+    
+    Returns:
+        str: image name"""
 
 
 def dob(min_age: int = 18, max_age: int = 80) -> date:

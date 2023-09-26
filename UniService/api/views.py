@@ -1,9 +1,8 @@
-from django.shortcuts import render
 from accounts.models import User
-from django.shortcuts import get_object_or_404
+from api.serializer import UserSerializer
+from django.shortcuts import get_object_or_404, render
 from rest_framework import viewsets
 from rest_framework.response import Response
-from api.serializer import UserSerializer
 
 
 class UserViewSet(viewsets.ViewSet):
