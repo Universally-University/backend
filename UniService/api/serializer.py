@@ -1,13 +1,9 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Student
+from accounts.models import User
 
 
-class StudentSerializer(ModelSerializer):
+
+class UserSerializer(ModelSerializer):
     class Meta:
-        model = Student
-        fields = "__all__"
-        
-class StaffSerializer(ModelSerializer):
-    class Meta:
-        model = Staff
+        model = User
         fields = "__all__"
