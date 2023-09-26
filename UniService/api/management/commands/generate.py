@@ -149,7 +149,7 @@ def names(x: int, gender: str) -> list[tuple[str, str, str]]:
     return name_list
 
 
-def address() -> str:
+def address(gender:str) -> str:
     """Generate a random address.
 
     Returns:
@@ -168,7 +168,7 @@ def address() -> str:
     return address
 
 
-def Images() -> str:
+def UserImages() -> str:
     """Generate a number to assign an image.
     
     Returns:
