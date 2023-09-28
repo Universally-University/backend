@@ -4,8 +4,7 @@ from datetime import date, timedelta
 
 import api.models as api
 import tqdm
-from accounts.models import User
-from accounts.models import UserManager
+from accounts.models import User, UserManager
 from api.util import current_total
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -163,10 +162,9 @@ def address() -> str:
     Returns:
         str: Random Address.
     """
-    from mock_data.addressInfo import streettype
+    from mock_data.addressInfo import streettype, suburbs
     #from mock_data.addressInfo import streetnames
     from mock_data.male_firstname import names
-    from mock_data.addressInfo import suburbs
 
     address = str(random.randrange(1,210))+ " "
     address += random.choice(names) + " "
