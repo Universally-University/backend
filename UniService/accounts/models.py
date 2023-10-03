@@ -35,7 +35,7 @@ class UserManager(BaseUserManager):
 
 # Create your models here.
 class User(AbstractBaseUser, PermissionsMixin):
-    id = models.IntegerField(_("User ID"), primary_key=True, auto_created=True)
+    id = models.IntegerField(_("User ID"), primary_key=True)
     USERNAME_FIELD = "id"
     first_name = models.CharField(
         _("First Name"), max_length=255, null=True, blank=True
