@@ -3,6 +3,14 @@ name = "backend"
 version = "0.1.0"
 description = "UniService Backend"
 authors = ["Ozy-Viking <admin@hankin.io>"]
+# packages = [
+#     { include = "UniService/accounts" },
+#     { include = "UniService/api" },
+#     { include = "UniService/frontend" },
+#     { include = "UniService/mock_data" },
+#     { include = "UniService/django_psdb_engine" },
+#     { include = "UniService/UniService" },
+# ]
 readme = "README.md"
 
 [tool.poetry.dependencies]

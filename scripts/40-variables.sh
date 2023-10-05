@@ -1,0 +1,27 @@
+#!/bin/sh
+
+cat > /etc/default/gunicorn <<EOF
+#!/bin/sh
+
+export NAME=${NAME}
+export DESC=${DESC}
+export PROJECTPATH=${PROJECTPATH}
+export USER=${USER}
+export APPNAME=${APPNAME}
+export APPMODULE=${APPMODULE}
+export PYTHONPATH=${PYTHONPATH}
+export CONFFILE=${CONFFILE}
+export DAEMON=${DAEMON}
+export PIDFILE=${PIDFILE}
+export SLEEPSEC=${SLEEPSEC}
+export UPGRADEWAITLOOPS=${UPGRADEWAITLOOPS}
+export CHECKSLEEP=${CHECKSLEEP}
+export GUNICORN_BIND=${GUNICORN_BIND}
+export DB_NAME=${DB_NAME}
+export DB_USER=${DB_USER}
+export DB_PASSWORD=${DB_PASSWORD}
+export DB_HOST=${DB_HOST}
+export DB_PORT=${DB_PORT}
+export MYSQL_ATTR_SSL_CA=${MYSQL_ATTR_SSL_CA}
+
+EOF

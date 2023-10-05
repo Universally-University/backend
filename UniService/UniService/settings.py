@@ -27,10 +27,11 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "django_filters",
     "api",
     "accounts",
+    "frontend",
     "rest_framework",
+    "django_filters",
 ]
 
 MIDDLEWARE = [
@@ -75,7 +76,10 @@ DATABASES = {
         "PORT": os.environ.get("DB_PORT"),
         "USER": os.environ.get("DB_USER"),
         "PASSWORD": os.environ.get("DB_PASSWORD"),
-        "OPTIONS": {"ssl": {"ca": os.environ.get("MYSQL_ATTR_SSL_CA")}},
+        "OPTIONS": {
+            "ssl": {"ca": os.environ.get("MYSQL_ATTR_SSL_CA")},
+            "charset": "utf8mb4",
+        },
     }
 }
 
@@ -114,7 +118,13 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.2/howto/static-files/
 
-STATIC_URL = "static/"
+STATIC_URL = "accounts/static/"
+# STATICFILES_DIRS = [
+#     BASE_DIR / "static",
+#     "/var/www/static/",
+# ]
+STATIC_ROOT = (BASE_DIR / "static") / "static"
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
