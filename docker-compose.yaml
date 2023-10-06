@@ -21,8 +21,8 @@ services:
       # - GUNICORN_BIND='["unix:/tmp/gunicorn.sock"]' # Bind address for Gunicorn. *NOTE* change the nginx.conf file to match. 
       - PIDFILE=/tmp/gunicorn.pid
       - DB_NAME=serviceuni
-      - DB_USER=bzkojk518zum5f8jygp3
-      - DB_PASSWORD=pscale_pw_HIUHrXiLwZcWugN1NRIOu3wXjVjNUw8vp2iI10wQXRP
+      - DB_USER=aiarbtoewwhmx6ry8utq
+      - DB_PASSWORD=pscale_pw_58MY0lArRQLNgJJHbLsaD0TXD3HyiuoVKWyNkttAqS3
       - DB_HOST=aws.connect.psdb.cloud
       - DB_PORT=3306
       - MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt

@@ -12,6 +12,7 @@ from django.core.management.base import BaseCommand, CommandError
 BASE_ID: int = 1000000
 Set_Usernames = set()
 
+
 class Command(BaseCommand):
     help = "Generates data"
 
@@ -62,6 +63,7 @@ class Command(BaseCommand):
                     type=user[3],
                     address=user[4],
                     dob=user[5],
+                    image=user_images(user[2]),
                 )
                 user.set_password(settings.USER_PASSWORD)
                 user.save()
@@ -151,10 +153,11 @@ def names(x: int, gender: str) -> list[tuple[str, str, str]]:
 def UserName() -> str:
     global Set_Usernames
     counter = 0
-    temp_username = "ZH"+counter
+    temp_username = "ZH" + counter
     if temp_username in Set_Usernames:
         Set_Usernames.add()
     {User.objects.all()}
+
 
 def address() -> str:
     """Generate a random address.
@@ -163,10 +166,11 @@ def address() -> str:
         str: Random Address.
     """
     from mock_data.addressInfo import streettype, suburbs
-    #from mock_data.addressInfo import streetnames
+
+    # from mock_data.addressInfo import streetnames
     from mock_data.male_firstname import names
 
-    address = str(random.randrange(1,210))+ " "
+    address = str(random.randrange(1, 210)) + " "
     address += random.choice(names) + " "
     address += random.choice(streettype) + ", "
     address += random.choice(suburbs)
@@ -174,21 +178,23 @@ def address() -> str:
     return address
 
 
-def UserImages(gender:str) -> str:
+def user_images(gender: str) -> str:
     """Generate a number to assign an image.
-    https://github.com/Universally-University/backend/blob/main/UniService/mock_data/UserImages/{gender}/image{image_num}.png?raw=true
+    https://raw.githubusercontent.com/Universally-University/backend/main/UniService/mock_data/UserImages/Female/image01.png
     Returns:
     str: image name"""
     max_female = 12
     max_male = 15
-    imagestr = "https://github.com/Universally-University/backend/blob/main/UniService/mock_data/UserImages/"
-    match gender.lower():
-        case "female":
-            num = random.randrange(1,max_female)
-            imagestr += "Female/image" + str(num) + ".png?raw=true"
-        case "male":
-            num = random.randrange(1,max_male)
-            imagestr += "Male/image" + str(num) + ".png?raw=true"
+    imagestr = "https://raw.githubusercontent.com/Universally-University/backend/main/UniService/mock_data/UserImages/"
+    match gender.upper()[0]:
+        case "F":
+            num = random.randint(1, max_female)
+            imagestr += f"Female/image{num:02}.png"
+        case "M":
+            num = random.randint(1, max_male)
+            imagestr += f"Male/image{num:02}.png"
+        case _:
+            raise NotImplementedError(f"Only Male or Female: {gender}")
     return imagestr
 
 

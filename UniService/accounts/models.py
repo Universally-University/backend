@@ -82,7 +82,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name_plural = _("Users")
 
     def __str__(self):
-        printable_items=[self.gender, self.dob, self.address]
+        printable_items=[self.gender, self.dob, self.address, self.image]
         return f"{self.type} {self.id}: {self.first_name} {self.last_name}{', ' if all(printable_items) else ''}{', '.join([str(item) for item in printable_items if item])}"
 
     def get_full_name(self):
