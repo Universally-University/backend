@@ -6,11 +6,12 @@ services:
     ports:
       - "29000:80"
     volumes:
-      - ./UniService/static:/home/www-data/app/static
+      # - ./UniService/static:/home/www-data/app/static
       - ./UniService/api:/home/www-data/app/api
       - ./UniService/frontend:/home/www-data/app/frontend
       - ./UniService/UniService:/home/www-data/app/UniService
       - ./UniService/templates:/home/www-data/app/templates
+      - ./UniService/members_card:/home/www-data/app/members_card
     environment:
       - NAME='UniService' # Pretty Name
       - APPNAME=UniService # Django project name. The folder name that contains the wsgi.py file.
@@ -21,8 +22,8 @@ services:
       # - GUNICORN_BIND='["unix:/tmp/gunicorn.sock"]' # Bind address for Gunicorn. *NOTE* change the nginx.conf file to match. 
       - PIDFILE=/tmp/gunicorn.pid
       - DB_NAME=serviceuni
-      - DB_USER=aiarbtoewwhmx6ry8utq
-      - DB_PASSWORD=pscale_pw_58MY0lArRQLNgJJHbLsaD0TXD3HyiuoVKWyNkttAqS3
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
       - DB_HOST=aws.connect.psdb.cloud
       - DB_PORT=3306
       - MYSQL_ATTR_SSL_CA=/etc/ssl/certs/ca-certificates.crt

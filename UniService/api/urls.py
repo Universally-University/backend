@@ -20,13 +20,12 @@ from django.urls import path
 from rest_framework.routers import DefaultRouter
 
 from accounts.views import UserViewSet
+from members_card.views import MemberCardViewSet
 
 router = DefaultRouter()
-router.register(r"users", UserViewSet, basename="user")
-urlpatterns = router.urls
+router.register(r"user", UserViewSet, basename="user")
+router.register(r"card", MemberCardViewSet, basename="members_card")
 
 urlpatterns = [
     *router.urls,
-    # path("", UserViewSet.as_view()),
-    # path("type(?)", admin.site.urls),
 ]
