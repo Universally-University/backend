@@ -53,7 +53,9 @@
 			<label for="btnChoose" class="description">Photo (maximum file size 2MB in JPG or PNG format) <span
 					id="btnChoosen" aria-hidden="true" class="required">*</span></label>
 			<div>
-				<input id="btnChoose" name="btnChoose" class="element file" type="file" onchange="ChangePic(this);">
+				<input id="btnChoose" name="btnChoose" class="element file" type="file" accept=".png, .jpg, .jpeg" onchange="ChangePic(this);">
+				<span id="spnFilePath"></span>
+				<input type="file" id="FileUpload" style="display: none" />
 				<p></p>
 				<button onClick="showSelection();">
 					View Sample ID Card onscreen
@@ -69,7 +71,7 @@
 					<div class="externalbox" id="externalbox">
 						<div id="inputdata"></div>
 					</div>
-					<img class="overlay" id="overlay" src="{% static 'images/sample_stamp.png' %}" />
+					<img class="overlay" id="overlay" src="{% static 'images/Blank.png' %}" />
 				</div>
 				<p></p>
 				<button onClick="saveSelection();">
