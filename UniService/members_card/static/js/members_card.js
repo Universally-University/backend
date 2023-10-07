@@ -48,5 +48,6 @@ function showSelection(sid, firstname, lastname, img, dob) {
     // deepcode ignore DOMXSS: This is validated elsewhere.
     document.getElementById("inputdata").innerHTML = DrawCode39Barcode(String(sid), 0);
     document.getElementById("photo").src = img;
+    document.getElementById("HEREIAM")
 }
 // limit_input()
