@@ -55,6 +55,7 @@ function ChangePic(income) {
     //var fileName = income.value;
     var fileName = income.value.split('\\')[income.value.split('\\').length - 1];
     filePath.innerHTML = "<b>Selected File: </b>" + fileName;
+    limit_input();
     showSelection();
     document.getElementById("photo").src = fileName;
 }
@@ -69,6 +70,7 @@ function showSelection(sid, firstname, lastname, img, dob, issue, expire) {
     // deepcode ignore DOMXSS: This is validated elsewhere.
     document.getElementById("inputdata").innerHTML = DrawCode39Barcode(String(sid), 0);
     document.getElementById("overlay").src="../accounts/static/images/sample_stamp.png"
-    document.getElementById("photo").src = img;
+    //document.getElementById("photo").src = img;
+    document.getElementById("imagePreview").style = style="background-image: url(" + img + ");"
 }
 // limit_input()

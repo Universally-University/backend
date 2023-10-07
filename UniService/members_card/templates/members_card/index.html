@@ -49,6 +49,8 @@
 				</ul>
 			</form>
 		</div>
+		<p></p>
+		<!-- 
 		<li id="btnChoose" class="column_2">
 			<label for="btnChoose" class="description">Photo (maximum file size 2MB in JPG or PNG format) <span
 					id="btnChoosen" aria-hidden="true" class="required">*</span></label>
@@ -61,9 +63,20 @@
 					View Sample ID Card onscreen
 				</button>
 				<p></p>
+		-->
 				<div class="CardContainer">
 					<img class="card" src="{% static 'images/card.png' %}" />
-					<img class="photo" id="photo" src="" />
+					<!--<img class="photo" id="photo" src="" /> -->
+					<div class="avatar-upload">
+						<div class="avatar-edit">
+							<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+							<label for="imageUpload"></label>
+						</div>
+						<div class="avatar-preview">
+							<div id="imagePreview" style="">
+							</div>
+						</div>
+					</div>
 					<div class="MemberNo"><span id="cardmember"></span></div>
 					<div class="NameLoc"><span id="cardname"></span></div>
 					<div class="DOBLoc"><span id="dob"></span></div>
@@ -80,6 +93,42 @@
 			</div>
 			</div>
 		</li>
+		<!--inserted here>
+		-->
+		This section come from <a href="https://codepen.io/siremilomir/pen/jBbQGo"> here </a></href>
+		<!-- <div class="container">
+			<div class="avatar-upload">
+				<div class="avatar-edit">
+					<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+					<label for="imageUpload"></label>
+				</div>
+				<div class="avatar-preview">
+					<div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
+					</div>
+				</div>
+			</div>
+		</div>
+		-->
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+				<script id="rendered-js" >
+		  function readURL(input) {
+			if (input.files && input.files[0]) {
+			  var reader = new FileReader();
+			  reader.onload = function (e) {
+				$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
+				$('#imagePreview').hide();
+				$('#imagePreview').fadeIn(650);
+			  };
+			  reader.readAsDataURL(input.files[0]);
+			}
+		  }
+		  $("#imageUpload").change(function () {
+			readURL(this);
+		  });
+		   </script>
+					
+		<!--inserted here>
+		-->
 		<script type="text/javascript" src="{% static 'js/members_card.js' %}"></script>
 	</body>
 </html>
