@@ -43,7 +43,6 @@ COPY --chown=www-data:www-data UniService/ /home/www-data/app/
 COPY --chown=www-data:www-data gunicorn/nginx.conf /etc/nginx/nginx.conf
 COPY --chown=www-data:www-data gunicorn/gunicorn* /etc/gunicorn/
 COPY --chown=www-data:www-data --chmod=777 scripts/ /docker-entrypoint.d/
-RUN ln -s /home/www-data/app/static /home/www-data/accounts
 
 ENV PATH=/docker-entrypoint.d:/home/www-data/app:/home/www-data/app/.venv/bin:${PATH}
 
