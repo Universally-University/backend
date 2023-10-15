@@ -15,11 +15,21 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import include, path, re_path
+from django.conf import settings
+from django.conf.urls.static import static
+
+service_name = settings.SERVICE_NAME
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
-    path("api/", include("api.urls")),
-    path("card/", include("members_card.urls")),
-    # path("accounts/", include("accounts.urls")),
+    re_path(rf"^(?:{service_name}\/)?admin\/", admin.site.urls),
+    re_path(rf"^(?:{service_name}\/)?api\/", include("api.urls")),
+    re_path(rf"^(?:{service_name}\/)?card\/", include("members_card.urls")),
+    re_path(rf"^(?:{service_name}\/)?accounts\/", include("accounts.urls")),
+    re_path(rf"^(?:{service_name}\/)?api-auth\/", include("rest_framework.urls")),
+    # path("enroll/", include("UniService.urls")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static("/", document_root=settings.STATIC_ROOT)

@@ -1,8 +1,20 @@
-:root{
-  --card-width:500px;
-  --card-height:300px;
+:root {
+  --card-width: 500px;
+  --card-height: 300px;
+  --photo-width: 200px;
+  --photo-height: 200px;
 }
 
+body {
+  margin:0;
+}
+
+#page_content{
+  margin: 10px;
+  max-width:1024px;
+  margin-left: auto;
+  margin-right: auto;
+}
 #barcode {
   font-weight: normal;
   font-style: normal;
@@ -17,6 +29,8 @@
   left: 0;
   width: var(--card-width);
   height: var(--card-height);
+  margin-left: auto;
+  margin-right: auto;
 }
 .card {
   position: relative;
@@ -26,6 +40,19 @@
   width: var(--card-width);
   border: 1px solid #000000;
   border-radius: 20px;
+}
+.center{
+  margin-left: auto;
+  margin-right: auto;
+}
+.NameLoc {
+  position: absolute;
+  top: 95px;
+  left: 16px;
+}
+#cardname {
+  font-size: 20px;
+  font-weight: 700;
 }
 .photo {
   position: absolute;
@@ -37,55 +64,52 @@
 }
 .MemberNo {
   position: absolute;
-  top: 90px;
+  top: 120px;
   left: 16px;
 }
 .Expiry {
   position: absolute;
-  top: 90px;
-  left: 100px;
+  bottom: 80px;
+  right: 230px;
+  vertical-align: bottom;
 }
-.NameLoc {
-  position: absolute;
-  top: 130px;
-  left: 16px;
-}
+
 .externalbox {
   position: absolute;
-  top: 170px;
-  left: 16px;
-  /* width:5in;
-   height:50px */
+  bottom: 10px;
+  left: 140px;
 }
-.DOBLoc{
-  position: absolute;
-  top: 100px;
-  left: 16px;
+#inputdata {
+  left: -50%;
+  position: relative;
 }
 .overlay {
   position: absolute;
-  top: 90px;
+  top: 65px;
   left: 50px;
   width: 200px;
   height: 200px;
   border: 0px solid #000000;
+}
+.rightAligned {
+  text-align: right;
+  margin: 0;
 }
 
 /*Inserting here for image preview*/
 
 .avatar-upload {
   position: absolute;
-  top: 40px;
-  right: 70px;
-  max-width: 150px;
-  max-height: 150px;
-  margin: 50px auto;
+  bottom: 10px;
+  right: 20px;
+  max-width: var(--photo-width);
+  height: var(--photo-height);
 }
 .avatar-upload .avatar-edit {
   position: absolute;
-  right: -50px;
   z-index: 1;
   top: 20px;
+  right: -15px;
 }
 .avatar-upload .avatar-edit input {
   display: none;
@@ -96,7 +120,7 @@
   height: 34px;
   margin-bottom: 0;
   border-radius: 100%;
-  background: #FFFFFF;
+  background: #ffffff;
   border: 1px solid transparent;
   box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.12);
   cursor: pointer;
@@ -109,7 +133,7 @@
 }
 .avatar-upload .avatar-edit input + label:after {
   content: "\f040";
-  font-family: 'FontAwesome';
+  font-family: "FontAwesome";
   color: #757575;
   position: absolute;
   top: 10px;
@@ -120,16 +144,15 @@
 }
 .avatar-upload .avatar-preview {
   width: 192px;
-  height: 192px;
+  height: 200px;
   position: relative;
-  border-radius: 100%;
-  border: 6px solid #F8F8F8;
-  box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+  /* border-radius: 100%; */
+  /* border: 6px solid #F8F8F8; */
+  /* box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1); */
 }
 .avatar-upload .avatar-preview > div {
   width: 100%;
   height: 100%;
-  border-radius: 100%;
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;

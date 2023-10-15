@@ -9,7 +9,7 @@ from .models import MemberCard
 class MemberCardViewSet(viewsets.ModelViewSet):
     queryset = MemberCard.objects.all().order_by("-card_num")
     serializer_class = MemberCardSerializer
-    # permission_classes = [permissions.AllowAny]
+    permission_classes = [permissions.IsAuthenticated]
     search_fields = ["=user_id"]
     filterset_fields = ["user_id"]
 

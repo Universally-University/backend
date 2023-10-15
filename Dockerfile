@@ -52,6 +52,7 @@ RUN <<EOF
 mkdir /var/log/gunicorn
 chown -R www-data:www-data /var/log/gunicorn
 mv /home/www-data/app/build/static/* /var/www/static
+mkdir /var/www/enroll/static/
 chmod -R o-rwx /etc/gunicorn
 EOF
 

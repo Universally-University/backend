@@ -1,135 +1,77 @@
-<!DOCTYPE html>
-<html>
+{% extends 'accounts/base.html' %}
 
-	<head>
-		<title>Members Card</title>
-		<meta charset="utf-8">
-		<meta http-equiv="X-UA-Compatible" content="IE=edge">
-		<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		{% load static %}
-		<link rel="stylesheet" type="text/css" media="screen" href="{% static 'members_card/css/members_card.css' %}">
-		<script type="text/javascript" src="{% static 'members_card/js/barcode.js' %}"></script>
+{% block title %}: Enrollment{% endblock %}
 
+{% block head %}
+	{% load static %}
+	<script type="text/javascript" src="{% static 'members_card/js/barcode.js' %}"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
+{% endblock %}
 
-	<body id="main_body">
-		<div id="form_container">
-			<h1><a>Request to view a new electronic Universally University ID Card</a></h1>
-			<form id="ESP-4 View Card" class="top_label" method="post" data-highlightcolor="#ececec" action="">
-				<div class="form_description">
-					<h2>Request to view a new photo on a Universally University Member ID Card</h2>
-					<p>This form is for members who are enrolled and wish to see what a new identity card would look
-						like before applying for a new member ID card.</p>
-				</div>
-
-				<label class="description" for="txtMemberNo">Member number <span id="required_4" aria-hidden="true"
-						class="required">*</span></label>
+{% block content %}
+<div id="form_container">
+	{% load static %}
+	<h1>Request a new Universally University ID Card</h1>
+	<form id="ESP-4 View Card" class="top_label" method="post" data-highlightcolor="#ececec" action="">
+		{% csrf_token %}
+		<div class="form_description">
+			<p>This form is for members who are enrolled and wish to see what a new identity card would look
+				like before applying for a new member ID card.</p>
+			</div>
+			
+			<label class="description" for="txtMemberNo">Member number <span id="required_4" aria-hidden="true"
+				class="required">*</span></label>
 				<div>
-					<input id="txtMemberNo" name="txtMemberNo" type="number" maxlength="7" value=""
-						onkeyup="limit_input();">
+					<input id="txtMemberNo" name="txtMemberNo" type="number" maxlength="7" value="{{ user.id }}" onload="limit_input();" onkeyup="limit_input();">
 					<span id="range" class="label">Must be <var id="range">7</var> digits.&nbsp;&nbsp; <em
-							class="currently_entered">Currently Entered: <span id="counterHolder">0</span>
-							digits.</em></span>
-				</div>
-				<p></p>
-				<fieldset>
-					<legend>Details</legend>
-					<span class="simple_name_1">
-						<label for="txtFName">First Name</label>
-						<input id="txtFName" name="TxtFName" type="text" class="element text" maxlength="255" size="8"
-							value="" disabled>
-					</span>
-					<span class="simple_name_2">
-						<label for="txtLName">Last Name</label>
-						<input id="txtLName" name="txtLName" type="text" class="element text" maxlength="255" size="14"
-							value="" disabled>
-					</span>
-				</fieldset>
+						class="currently_entered">Currently Entered: <span id="counterHolder">0</span>
+						digits.</em></span>
+					</div>
+					<br />
+					<fieldset>
+						<legend>Details</legend>
+						<span class="simple_name_1">
+							<label for="txtFName">First Name</label>
+							<input id="txtFName" name="TxtFName" type="text" class="element text" maxlength="255" size="8" value=""
+							disabled>
+						</span>
+						<span class="simple_name_2">
+							<label for="txtLName">Last Name</label>
+							<input id="txtLName" name="txtLName" type="text" class="element text" maxlength="255" size="14" value=""
+							disabled>
+						</span>
+					</fieldset>
 				</li>
-				</ul>
-			</form>
-		</div>
-		<p></p>
-		<!-- 
-		<li id="btnChoose" class="column_2">
-			<label for="btnChoose" class="description">Photo (maximum file size 2MB in JPG or PNG format) <span
-					id="btnChoosen" aria-hidden="true" class="required">*</span></label>
-			<div>
-				<input id="btnChoose" name="btnChoose" class="element file" type="file" accept=".png, .jpg, .jpeg" onchange="ChangePic(this);">
-				<span id="spnFilePath"></span>
-				<input type="file" id="FileUpload" style="display: none" />
-				<p></p>
-				<button onClick="showSelection();">
-					View Sample ID Card onscreen
-				</button>
-				<p></p>
-		-->
-				<div class="CardContainer">
-					<img class="card" src="{% static 'images/card.png' %}" />
-					<!--<img class="photo" id="photo" src="" /> -->
-					<div class="avatar-upload">
-						<div class="avatar-edit">
-							<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-							<label for="imageUpload"></label>
-						</div>
-						<div class="avatar-preview">
-							<div id="imagePreview" style="">
-							</div>
-						</div>
-					</div>
-					<div class="MemberNo"><span id="cardmember"></span></div>
-					<div class="NameLoc"><span id="cardname"></span></div>
-					<div class="DOBLoc"><span id="dob"></span></div>
-					<div class="Expiry"><span id="cardex"></span></div>
-					<div class="externalbox" id="externalbox">
-						<div id="inputdata"></div>
-					</div>
-					<img class="overlay" id="overlay" src="{% static 'images/Blank.png' %}" />
-				</div>
-				<p></p>
-				<button onClick="saveSelection();">
-					Save photo ID card
-				</button>
+			</ul>
+		</form>
+	</div>
+	<br />
+	<div class="CardContainer">
+		<img class="card" src="{% static 'members_card/images/card.png' %}" />
+		<div class="avatar-upload">
+			<div class="avatar-edit">
+				<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
+				<label for="imageUpload"></label>
 			</div>
-			</div>
-		</li>
-		<!--inserted here>
-		-->
-		This section come from <a href="https://codepen.io/siremilomir/pen/jBbQGo"> here </a></href>
-		<!-- <div class="container">
-			<div class="avatar-upload">
-				<div class="avatar-edit">
-					<input type='file' id="imageUpload" accept=".png, .jpg, .jpeg" />
-					<label for="imageUpload"></label>
-				</div>
-				<div class="avatar-preview">
-					<div id="imagePreview" style="background-image: url(http://i.pravatar.cc/500?img=7);">
-					</div>
-				</div>
+			<div class="avatar-preview">
+				<div id="imagePreview" style="">
 			</div>
 		</div>
-		-->
-		<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js'></script>
-				<script id="rendered-js" >
-		  function readURL(input) {
-			if (input.files && input.files[0]) {
-			  var reader = new FileReader();
-			  reader.onload = function (e) {
-				$('#imagePreview').css('background-image', 'url(' + e.target.result + ')');
-				$('#imagePreview').hide();
-				$('#imagePreview').fadeIn(650);
-			  };
-			  reader.readAsDataURL(input.files[0]);
-			}
-		  }
-		  $("#imageUpload").change(function () {
-			readURL(this);
-		  });
-		   </script>
-					
-		<!--inserted here>
-		-->
-		<script type="text/javascript" src="{% static 'js/members_card.js' %}"></script>
-	</body>
-
-</html>
+	</div>
+	<div class="MemberNo"><span id="cardmember"></span></div>
+	<div class="NameLoc"><span id="cardname"></span></div>
+	<div class="DOBLoc"><span id="dob"></span></div>
+	<div class="Expiry"><span id="cardex"></span></div>
+	<div class="externalbox" id="externalbox">
+		<div id="inputdata"></div>
+	</div>
+	<img class="overlay" id="overlay" src="{% static 'members_card/images/Blank.png' %}" />
+</div>
+<br />
+<button onClick="saveSelection();" class="center">
+	Request a new ID card
+</button>
+</div>
+</div>
+<script type="text/javascript" src="{% static 'members_card/js/members_card.js' %}"></script>
+{% endblock %}

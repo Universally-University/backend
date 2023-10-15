@@ -1,6 +1,7 @@
 from django.urls import include, path
 from rest_framework import routers
 import members_card.views as views
+from django.conf import settings
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.

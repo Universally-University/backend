@@ -7,16 +7,16 @@
  * http://www.barcoderesource.com
  */
 
-function DrawCode39Barcode(data, checkDigit) {
-	return DrawHTMLBarcode_Code39(data, checkDigit, "yes", "in", 0, 3, 1, 3, "bottom", "center", "", "black", "white");
-}
 
-function DrawHTMLBarcode_Code39(data,
+
+function DrawHTMLBarcode_Code39(
+	data,
 	checkDigit,
 	humanReadable,
 	units,
 	minBarWidth,
-	width, height,
+	width, 
+	height,
 	barWidthRatio,
 	textLocation,
 	textAlignment,
@@ -192,9 +192,9 @@ function DrawBarcode_Code39(data,
 		var humanSpan = "";
 		if (humanReadable == 'yes' && textLocation == 'bottom') {
 			if (textStyle == '')
-				humanSpan = '<br /><span style="font-family : arial; font-size:12pt">' + humanReadableText + '</span>';
+				humanSpan = '<br /><span style="font-family : arial; font-size:12pt">' + humanReadableText.slice(1,-1) + '</span>';
 			else
-				humanSpan = '<br /><span style=' + textStyle + '>' + humanReadableText + '</span>';
+				humanSpan = '<br /><span style=' + textStyle + '>' + humanReadableText.slice(1,-1) + '</span>';
 		}
 		result = result + humanSpan + "</div>";
 	}

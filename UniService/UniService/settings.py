@@ -17,9 +17,11 @@ DEBUG = True
 ALLOWED_HOSTS = ["*"]
 # deepcode ignore HardcodedNonCryptoSecret: This is for fake data.
 USER_PASSWORD = "testing124"
+SERVICE_NAME = "/enroll"
+LOGIN_REDIRECT_URL = f"{SERVICE_NAME}/card/"
 
 # Application definition
-
+LOGIN_URL = f"{SERVICE_NAME}/accounts/login/"
 INSTALLED_APPS = [
     "django.contrib.admin",
     "django.contrib.auth",
@@ -41,6 +43,7 @@ MIDDLEWARE = [
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
+    "accounts.pipeline.set_user_cookie",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
@@ -65,7 +68,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "UniService.wsgi.application"
 
-
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
@@ -78,7 +80,7 @@ DATABASES = {
         "USER": os.environ.get("DB_USER"),
         "PASSWORD": os.environ.get("DB_PASSWORD"),
         "OPTIONS": {
-            "ssl": {"ca": (BASE_DIR/"ca-cert")/"curl-ca-bundle.crt"},
+            "ssl": {"ca": (BASE_DIR / "ca-cert") / "curl-ca-bundle.crt"},
             "charset": "utf8mb4",
         },
     }
@@ -88,6 +90,13 @@ REST_FRAMEWORK = {
     "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"],
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.PageNumberPagination",
     "PAGE_SIZE": 50,
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.BasicAuthentication",
+        "rest_framework.authentication.SessionAuthentication",
+    ],
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.AllowAny",
+    ],
 }
 
 # Password validation
@@ -120,11 +129,11 @@ USE_I18N = True
 
 USE_TZ = True
 
-STATIC_URL = "accounts/static/"
+STATIC_URL = "enroll/static/"
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
-STATIC_ROOT = "/var/www/accounts/static/"
+STATIC_ROOT = "/var/www/enroll/static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 

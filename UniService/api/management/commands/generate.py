@@ -2,9 +2,9 @@ import math
 import random
 from datetime import date, timedelta
 
-import api.models as api
 import tqdm
-from accounts.models import User, UserManager
+from accounts.models import User
+from members_card.models import MemberCard
 from api.util import current_total
 from django.conf import settings
 from django.core.management.base import BaseCommand, CommandError
@@ -67,6 +67,8 @@ class Command(BaseCommand):
                 )
                 user.set_password(settings.USER_PASSWORD)
                 user.save()
+                card = MemberCard(active=True, user_id=user, photo=user.image)
+                card.save()
         except KeyboardInterrupt:
             current_total()
             raise SystemExit
@@ -75,12 +77,9 @@ class Command(BaseCommand):
 
 def unique_id(current_user_len) -> int:
     check_user_id = BASE_ID + current_user_len
-    # while True:
-    # temp_user_count = User.objects.filter(id=check_user_id).count()
     global CURRENT_USER_COUNT
     CURRENT_USER_COUNT += 1
     return check_user_id
-    # check_user_id += 1
 
 
 def name_list(
@@ -148,15 +147,6 @@ def names(x: int, gender: str) -> list[tuple[str, str, str]]:
             )
         )
     return name_list
-
-
-def UserName() -> str:
-    global Set_Usernames
-    counter = 0
-    temp_username = "ZH" + counter
-    if temp_username in Set_Usernames:
-        Set_Usernames.add()
-    {User.objects.all()}
 
 
 def address() -> str:

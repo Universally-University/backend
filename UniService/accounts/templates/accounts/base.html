@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>UniService{% block title %}{% endblock %}</title>
+        {% load static %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'members_card/css/navigation.css' %}">
+        <link rel="stylesheet" type="text/css" media="screen" href="{% static 'members_card/css/members_card.css' %}">
+        {% block head %}{% endblock %}
+    </head>
+
+    <body>
+        <div class="navbar">
+            <div class="navbar-container">
+                <div class="dropdown">
+                    <button class="dropbtn">Enrollment
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/enroll/card/">New ID Card</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Library
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/library/">Book a Room</a>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Wellbeing
+                        <i class="fa fa-caret-down"></i>
+                    </button>
+                    <div class="dropdown-content">
+                        <a href="/wellbeing/">Book an Appoinment</a>
+                    </div>
+                </div>
+                {% if user.is_authenticated %}
+                <div><a href="{% url 'logout' %}" class="split">logout</a></div>
+                <div><a class="split">Hello, {{ user.first_name }} {{ user.last_name }}</a></div>
+                {% else %}
+                <div><a href="{% url 'login' %}" class="split">login</a></div>{% endif %}
+            </div>
+        </div>
+        <div id="page_content">
+            {% block content %}{% endblock %}
+        </div>
+    </body>
+
+</html>
