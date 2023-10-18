@@ -24,10 +24,9 @@ service_name = settings.SERVICE_NAME
 urlpatterns = [
     re_path(rf"^(?:{service_name}\/)?admin\/", admin.site.urls),
     re_path(rf"^(?:{service_name}\/)?api\/", include("api.urls")),
-    re_path(rf"^(?:{service_name}\/)?card\/", include("members_card.urls")),
+    re_path(rf"^(?:{service_name}\/)?(?:card\/)?", include("members_card.urls")),
     re_path(rf"^(?:{service_name}\/)?accounts\/", include("accounts.urls")),
     re_path(rf"^(?:{service_name}\/)?api-auth\/", include("rest_framework.urls")),
-    # path("enroll/", include("UniService.urls")),
 ]
 
 if settings.DEBUG:

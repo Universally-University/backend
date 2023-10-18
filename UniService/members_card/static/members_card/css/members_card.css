@@ -6,12 +6,12 @@
 }
 
 body {
-  margin:0;
+  margin: 0;
 }
 
-#page_content{
+#page_content {
   margin: 10px;
-  max-width:1024px;
+  max-width: 1024px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -41,7 +41,7 @@ body {
   border: 1px solid #000000;
   border-radius: 20px;
 }
-.center{
+.center {
   margin-left: auto;
   margin-right: auto;
 }
@@ -85,7 +85,7 @@ body {
 }
 .overlay {
   position: absolute;
-  top: 65px;
+  top: 82px;
   left: 50px;
   width: 200px;
   height: 200px;
