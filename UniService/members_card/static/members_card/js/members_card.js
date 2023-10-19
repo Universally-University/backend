@@ -7,7 +7,7 @@ async function limit_input() {
     if (iEntered == iMax) {
         const sid = document.getElementById("txtMemberNo").value
         document.getElementById("txtFName").focus();
-        const user = await fetch(`/api/user/${sid}/`)
+        const user = await fetch(`/enroll/api/user/${sid}/`)
             .then((response) => {
                 if (response.ok) {
                     return response.json()
@@ -61,7 +61,7 @@ async function limit_input() {
 }
 
 async function member_cards(sid) {
-    return fetch(`/api/card/?user_id=${sid}`) // TODO: Not all the members are in the cards database for looking up expiry date
+    return fetch(`/enroll/api/card/?user_id=${sid}`)
         .then((response) => {
             if (response.ok) {
                 // console.log(response.json())
@@ -101,7 +101,7 @@ async function saveSelection(expiry = `${new Date().getFullYear()}-12-31`) {
             console.log(cards[i].card_num)
             const request_body = JSON.stringify({ "active": false })
             console.log(request_body.length)
-            fetch(`/api/card/${cards[i].card_num}/`, {
+            fetch(`/enroll/api/card/${cards[i].card_num}/`, {
                 method: "PATCH",
                 headers: {
                     "Content-Type": "application/json",
@@ -128,7 +128,7 @@ async function saveSelection(expiry = `${new Date().getFullYear()}-12-31`) {
     })
     console.log(photo)
     const cardRequest = new Request(
-        "/api/card/",
+        "/enroll/api/card/",
         {
             method: "POST",
             headers: {
